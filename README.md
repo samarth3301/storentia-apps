@@ -1,11 +1,11 @@
 # CRM Backend Boilerplate
 
-A production-ready Express.js backend boilerplate with TypeScript, Prisma, Redis, and comprehensive security features.
+A production-ready Express.js backend boilerplate with TypeScript, Drizzle ORM, Redis, and comprehensive security features.
 
 ## Features
 
 - 🚀 **Express.js** with TypeScript
-- 🗄️ **Prisma ORM** with PostgreSQL
+- 🗄️ **Drizzle ORM** with PostgreSQL
 - ⚡ **Redis** for caching and sessions
 - 🔐 **JWT Authentication** with refresh tokens
 - 🛡️ **Security** (Helmet, CORS, Rate Limiting)
@@ -46,8 +46,7 @@ cp .env.example .env
 
 4. Set up the database:
 ```bash
-npm run db:migrate
-npm run db:seed
+npm run db:push
 ```
 
 5. Start development server:
@@ -83,11 +82,10 @@ npm run build            # Build for production
 npm run start            # Start production server
 
 # Database
-npm run db:generate      # Generate Prisma client
+npm run db:generate      # Generate Drizzle migrations
 npm run db:migrate       # Run database migrations
-npm run db:push          # Push schema changes
-npm run db:studio        # Open Prisma Studio
-npm run db:seed          # Seed database
+npm run db:push          # Push schema changes to database
+npm run db:studio        # Open Drizzle Studio
 
 # Testing
 npm run test             # Run tests
@@ -140,6 +138,8 @@ src/
 │       └── auth/
 │           ├── admin.controller.ts
 │           └── index.ts
+├── db/                         # Database schema and migrations
+│   └── schema.ts              # Drizzle schema definition
 ├── handlers/                   # Error and async handlers
 │   ├── async.handler.ts
 │   └── error.handler.ts
@@ -167,11 +167,11 @@ src/
 - **Helmet**: Security headers
 - **CORS**: Cross-origin resource sharing control
 - **Rate Limiting**: API rate limiting
-- **Input Validation**: Request validation with Joi
+- **Input Validation**: Request validation with Zod
 - **Password Hashing**: bcrypt with configurable rounds
 - **JWT Tokens**: Secure token-based authentication
 - **Token Blacklisting**: Logout functionality
-- **SQL Injection Protection**: Prisma ORM
+- **SQL Injection Protection**: Drizzle ORM
 - **XSS Protection**: Helmet and input sanitization
 
 ## Performance Optimizations
@@ -195,7 +195,7 @@ npm run docker:compose:up
 docker compose -f docker/compose.yaml logs -f
 
 # Stop services
-npm run docker:compose:down
+npm run docker:compose:up
 ```
 
 ### Using Docker Only
